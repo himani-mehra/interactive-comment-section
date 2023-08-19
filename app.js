@@ -40,7 +40,7 @@ const data = {
           {
             parent: 2,
             id: 1,
-            content:"Woah!! I can even delete a comment , edit it , and can comment upon a comment",
+            content:"Woah!! I can even delete a comment ,can comment upon a comment",
             createdAt: "1 week ago",
             score: 4,
             replyingTo: "Mark Zuckerberg",
@@ -166,20 +166,6 @@ const data = {
       commentNode.querySelector(".delete").addEventListener("click", () => {
         promptDel(commentObject);
       });
-      commentNode.querySelector(".edit").addEventListener("click", (e) => {
-        console.log(e);
-        const path = e.path[3].querySelector(".c-body");
-        if (
-          path.getAttribute("contenteditable") == false ||
-          path.getAttribute("contenteditable") == null
-        ) {
-          path.setAttribute("contenteditable", true);
-          path.focus()
-        } else {
-          path.removeAttribute("contenteditable");
-        }
-        
-      });
       return commentNode;
     }
     return commentNode;
@@ -187,14 +173,12 @@ const data = {
   
   const appendComment = (parentNode, commentNode, parentId) => {
     const bu_reply = commentNode.querySelector(".reply");
-    // parentNode.appendChild(commentNode);
     const appendedCmnt = appendFrag(commentNode, parentNode);
     const replyTo = appendedCmnt.querySelector(".usr-name").textContent;
     bu_reply.addEventListener("click", () => {
       if (parentNode.classList.contains("replies")) {
         spawnReplyInput(parentNode, parentId, replyTo);
       } else {
-        //console.log(appendedCmnt.querySelector(".replies"));
         spawnReplyInput(
           appendedCmnt.querySelector(".replies"),
           parentId,
